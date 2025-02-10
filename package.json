@@ -1,0 +1,11 @@
+{
+  "name": "Milestone-1-Static-resume-builder",
+  "version": "1.0.0",
+  "description": "A static resume builder project",
+  "scripts": {
+    "start": "live-server",
+    "build": "echo 'No build step for HTML projects'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
