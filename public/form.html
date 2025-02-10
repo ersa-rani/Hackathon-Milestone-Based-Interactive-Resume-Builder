@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Resume Builder</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Interactive Resume Builder</h1>
+            <button id="goToFormBtn" class="btn">Create Your Resume</button>
+        </header>
+
+        <div id="formSection" class="f-div" style="display: none;">
+            <form id="resume-form">
+                <div class="border">
+                    <h2>Enter Your Information</h2>
+                    <label for="userName">Username:</label>
+                    <input type="text" id="userName" name="userName" required>
+
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <fieldset>
+                        <legend>Gender:</legend>
+                        <label><input type="radio" name="gender" value="male" required> Male</label>
+                        <label><input type="radio" name="gender" value="female"> Female</label>
+                    </fieldset>
+
+                    <label for="nationality">Nationality:</label>
+                    <select id="nationality" name="nationality" required>
+                        <option value="">Select a country</option>
+                        <option value="Pakistan">Pakistan</option>
+                        <option value="India">India</option>
+                        <option value="USA">USA</option>
+                        <option value="Bangladesh">Bangladesh</option>
+                        <option value="China">China</option>
+                        <option value="America">America</option>
+                        <option value="Antarctica">Antarctica</option>
+                    </select>
+
+                    <label for="qualification">Qualification:</label>
+                    <select id="qualification" name="qualification" required>
+                        <option value="">Select qualification</option>
+                        <option value="Matric">Matric</option>
+                        <option value="Inter">Inter</option>
+                        <option value="Bachelor's">Bachelor's</option>
+                        <option value="Master's">Master's</option>
+                    </select>
+
+                    <label for="skills">Skills:</label>
+                    <textarea id="skills" name="skills" placeholder="List your skills..." required></textarea>
+
+                    <button type="submit" class="submit">Generate Resume</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="resume-display" contenteditable="true" style="display: none;">
+            <!-- Resume will be generated here -->
+        </div>
+
+        <button id="backToFormBtn" class="btn" style="display: none;">Back to Form</button>
+    </div>
+
+    <script>
+        document.getElementById('goToFormBtn').addEventListener('click', function() {
+            document.getElementById('formSection').style.display = 'block';
+            this.style.display = 'none';
+        });
+
+        document.getElementById('resume-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            let resumeHTML = `
+                <h1>${formData.get('name')}</h1>
+                <p>Email: ${formData.get('email')}</p>
+                <p>Nationality: ${formData.get('nationality')}</p>
+                <p>Gender: ${formData.get('gender')}</p>
+                <p>Qualification: ${formData.get('qualification')}</p>
+                <h2>Skills:</h2>
+                <p>${formData.get('skills')}</p>
+            `;
+
+            const resumeDisplay = document.getElementById('resume-display');
+            resumeDisplay.innerHTML = resumeHTML;
+            resumeDisplay.style.display = 'block';
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('backToFormBtn').style.display = 'block';
+        });
+
+        document.getElementById('backToFormBtn').addEventListener('click', function() {
+            document.getElementById('formSection').style.display = 'block';
+            document.getElementById('resume-display').style.display = 'none';
+            this.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
